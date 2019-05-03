@@ -17,7 +17,21 @@
 </div>
 <script>
     // component
-    const User = {template: '<div>User {{$route.params.id}}</div>'}
+    const User = {
+        template: '<div>User {{$route.params.id}}</div>',
+        // 监测变化
+        watch: {
+            '$route'(to, from) {
+                // 对路有变化做出响应
+                console.log(from, to)
+            }
+        },
+        // 导航守卫
+        beforeRouteUpdate(to, from, next) {
+            console.log(from, to)
+            next()
+        }
+    }
 
     // routes
     const routes = [
