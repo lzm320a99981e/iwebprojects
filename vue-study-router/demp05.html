@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态路由配置</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>命名路由</h1>
+    <p>当前路由名称：{{$route.name}}</p>
+    <p>
+        <router-link :to="{name: 'home'}">home</router-link>
+        <router-link :to="{name: 'foo'}">foo</router-link>
+        <router-link :to="{name: 'bar', params:{id:123}}">bar</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+<script>
+    // template
+    const Home = {template: `<div>Home</div>`}
+    const Foo = {template: `<div>Foo</div>`}
+    const Bar = {template: `<div>Bar {{$route.params.id}}</div>`}
+
+    // router
+    const router = new VueRouter({
+        routes: [
+            {path: '/', name: 'home', component: Home},
+            {path: '/foo', name: 'foo', component: Foo},
+            {path: '/bar/:id', name: 'bar', component: Bar}
+        ]
+    })
+    // mount to vue
+    const app = new Vue({
+        router
+    }).$mount('#app');
+</script>
+</body>
+</html>
