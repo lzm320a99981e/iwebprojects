@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态路由配置</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>捕获所有路由或 404 Not found 路由</h1>
+    <p>
+        <router-link to="/">/</router-link>
+        <router-link to="/user/foo">/user/foo</router-link>
+        <router-link to="/user/foo/bar">/user/foo/bar</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+<script>
+    // template
+    const NotFound = {template: `<div>404 Not found</div>`}
+    const User = {template: `<div>User {{$route.params.pathMatch}}</div>`}
+    // router
+    const router = new VueRouter({
+        routes: [
+            {path: '/user/*', component: User},
+            {path: '*', component: NotFound}
+        ]
+    })
+    // mount to vue
+    const app = new Vue({
+        router
+    }).$mount('#app');
+</script>
+</body>
+</html>
