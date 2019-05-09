@@ -70,7 +70,7 @@
 
 <script>
   export default {
-    name: "ContainerDemo"
+    name: "ButtonDemo"
   }
 </script>
 

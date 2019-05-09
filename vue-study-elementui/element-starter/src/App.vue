@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <!--<ContainerDemo/>-->
-    <ButtonDemo/>
+    <FormDemo/>
   </div>
 </template>
 
 <script>
   import ContainerDemo from '~/components/ContainerDemo'
   import ButtonDemo from '~/components/ButtonDemo'
+  import LinkDemo from '~/components/LinkDemo'
+  import FormDemo from '~/components/FormDemo'
 
   export default {
     name: 'app',
     components: {
       'ContainerDemo': ContainerDemo,
-      'ButtonDemo': ButtonDemo
+      'ButtonDemo': ButtonDemo,
+      'LinkDemo': LinkDemo,
+      'FormDemo': FormDemo
     }
   }
 </script>
