@@ -29,48 +29,41 @@ Axios.interceptors.response.use(
 );
 // [+++++++++++++++++ 全局设置-结束 +++++++++++++++++]
 
-export default {
-  get(url, params) {
+export const get = (url, params) => {
+  /**
+   * 创建一个异步容器
+   */
+  return new Promise(
     /**
-     * 创建一个异步容器
+     * 构建参数
+     * @param resolve 成功通知
+     * @param reject 失败通知
      */
-    new Promise(
-      /**
-       * 构建参数
-       * @param resolve 成功通知
-       * @param reject 失败通知
-       */
-      (resolve, reject) => {
-        Axios.get(url, {
-          params: {
-            ...params,
-            _t: new Date().getTime()
-          }
-        }).then(res => {
-          if (res.status === 200) {
-            if (res.data.code === '0') {
-              resolve(res.data);
-            } else {
-              showError(res.data.message);
-            }
+    (resolve, reject) => {
+      Axios.get(url, {
+        params: {
+          ...params,
+          _t: new Date().getTime()
+        }
+      }).then(res => {
+        if (res.status === 200) {
+          if (res.data.code === '0') {
+            resolve(res.data);
           } else {
-            showError();
-            reject(res);
+            showError(res.data.message);
           }
-        }).catch(err => {
+        } else {
           showError();
-          reject(err)
-        })
-      }
-    )
-  },
-  postBody() {
+          reject(res);
+        }
+      }).catch(err => {
+        showError();
+        reject(err)
+      })
+    }
+  )
+};
 
-  },
-  postForm() {
-
-  }
-}
 
 /**
  * 显示错误信息

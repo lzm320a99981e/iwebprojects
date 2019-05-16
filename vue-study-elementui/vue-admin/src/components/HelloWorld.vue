@@ -1,16 +1,26 @@
 <template>
   <div class="hello">
-    <el-button>按钮</el-button>
-    <h1>{{ msg }}</h1>
+    <el-button @click="reg">按钮</el-button>
+    <h1>{{ msg }} -> {{username}}</h1>
   </div>
 </template>
 
 <script>
+  import api from '@/api'
+
   export default {
     name: 'HelloWorld',
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: '起步',
+        username: ''
+      }
+    },
+    methods: {
+      reg() {
+        api.reg({username: 'xxx'}).then(res => {
+          this.username = res.data.username
+        })
       }
     }
   }
