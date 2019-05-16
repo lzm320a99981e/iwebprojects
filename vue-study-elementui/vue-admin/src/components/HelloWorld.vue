@@ -19,7 +19,8 @@
     methods: {
       reg() {
         api.reg({username: 'xxx'}).then(res => {
-          this.username = res.data.username
+          this.username = res.data.username;
+          this.$message(JSON.stringify(res.data))
         })
       }
     }
