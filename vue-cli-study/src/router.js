@@ -17,6 +17,11 @@ export default new Router({
           path: '/dashboard',
           meta: {title: '主面板'},
           component: resolve => require(['./views/Dashboard'], resolve)
+        },
+        {
+          path: '/table',
+          meta: {title: '表格'},
+          component: resolve => require(['./views/Table'], resolve)
         }
       ]
     }

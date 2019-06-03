@@ -1,12 +1,70 @@
 <template>
   <div class="header">
-    Header
+    <!-- 折叠按钮 -->
+    <div class="collapse-btn" @click="collapseHandle">
+      <i class="el-icon-menu"></i>
+    </div>
+    <!-- LOGO -->
+    <div class="logo">后台管理系统</div>
+    <!-- 右边 -->
+    <div class="header-right">
+      <!-- 用户信息 -->
+      <div class="header-user-con">
+        <!-- 全屏 -->
+        <div class="btn-fullscreen">
+          <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
+            <i class="el-icon-rank"></i>
+          </el-tooltip>
+        </div>
+        <!-- 消息 -->
+        <div class="btn-bell">
+          <el-tooltip effect="dark" :content="messages?`有${messages}未读消息`:`消息中心`" placement="bottom">
+            <router-link to="/tabs">
+              <i class="el-icon-bell"></i>
+            </router-link>
+          </el-tooltip>
+          <span class="btn-bell-badge" v-if="messages"></span>
+        </div>
+        <!-- 头像 -->
+        <div class="user-avator">
+          <img src="../assets/img/img.jpg"/>
+        </div>
+        <!-- 用户下拉菜单 -->
+        <el-dropdown class="user-name">
+          <span class="el-dropdown-link">
+            {{username}} <i class="el-icon-caret-bottom"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <a href="http://blog.gdfengshuo.com/about/" target="_blank">
+              <el-dropdown-item>关于作者</el-dropdown-item>
+            </a>
+            <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
+              <el-dropdown-item>项目仓库</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "Header"
+    name: "Header",
+    data() {
+      return {
+        collapse: false,
+        fullscreen: false,
+        messages: 2,
+        name: 'zhangsan'
+      }
+    },
+    methods: {
+      collapseHandle() {
+
+      }
+    }
   }
 </script>
 
@@ -95,7 +153,4 @@
     cursor: pointer;
   }
 
-  .el-dropdown-menu__item {
-    text-align: center;
-  }
 </style>
